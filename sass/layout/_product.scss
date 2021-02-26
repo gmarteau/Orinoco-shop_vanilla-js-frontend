@@ -1,0 +1,24 @@
+.product {
+    height: $pdt-sheet-height;
+    &__content {
+        height: 100%;
+    }
+    &__pic {
+        position: relative;
+        border-radius: $pdt-sheet-img-radius;
+        overflow: hidden;
+        &__img {
+            @include img-fill-space;
+        }
+    }
+    &__txt {
+        color: $clr-tertiary;
+        &__name {
+            @include font(spurple);
+            font-size: 4rem;
+        }
+    }
+    &__form {
+        color: $clr-tertiary;
+    }
+}

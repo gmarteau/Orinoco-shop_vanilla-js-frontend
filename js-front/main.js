@@ -61,7 +61,7 @@ async function createProductCards() {
     const productCardTemplate = document.querySelector("#product");
     const productCards = document.querySelector("#products");
     let teddiesList = await getTeddies();
-    teddiesList.forEach(product => {
+    teddiesList.forEach((product) => {
         let clone = document.importNode(productCardTemplate.content, true);
         clone.querySelector(".card-title").innerHTML = product.name;
         let price = product.price / 100;
@@ -80,15 +80,25 @@ const displayProductSheet = ($teddyName = Promise) => {
     const productSheet = document.querySelector("#productSheet");
     const pageTitle = document.querySelector("title");
     const titleGeneral = " | Orinoteddies par Orinoco";
+    const colorSelect = document.querySelector("#teddyColor");
+    const colorOptionTemplate = document.querySelector("#colorOption");
     $teddyName.then((product) => {
         console.log(product);
         pageTitle.innerHTML = product.name + titleGeneral;
-        productSheet.querySelector(".product__img__pic").setAttribute("src", product.imageUrl);
-        productSheet.querySelector(".product__img__pic").setAttribute("alt", "Peluche " + product.name);
+        productSheet.querySelector(".product__pic__img").setAttribute("src", product.imageUrl);
+        productSheet.querySelector(".product__pic__img").setAttribute("alt", "Peluche " + product.name);
         productSheet.querySelector(".product__txt__name").innerHTML = product.name;
         let price = product.price / 100;
         productSheet.querySelector(".product__txt__price").innerHTML = price + "€";
         productSheet.querySelector(".product__txt__description").innerHTML = product.description;
+        let colorList = product.colors;
+        console.log(colorList);
+        colorList.forEach((color) => {
+            let clone = document.importNode(colorOptionTemplate.content, true);
+            clone.querySelector("option").setAttribute("value", color);
+            clone.querySelector("option").innerHTML = color;
+            colorSelect.appendChild(clone);
+        });
     });
 };
 

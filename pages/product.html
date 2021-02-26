@@ -41,20 +41,24 @@
         </header>
 
         <main class="container product">
-            <div class="row" id="productSheet">
-                <div class="col-8 product__img">
-                    <img class="product__img__pic" />
+            <div class="row py-5 product__content" id="productSheet">
+                <div class="col-8 shadow product__pic">
+                        <img class="product__pic__img" />
                 </div>
-                <div class="col-4 product__txt">
+                <div class="col-4 px-5 product__txt">
                     <h1 class="product__txt__name"></h1>
-                    <p class="product__txt__price"></p>
-                    <p class="product__txt__description"></p>
+                    <p class="h3 mb-4 product__txt__price"></p>
+                    <p class="h5 mb-5 product__txt__description"></p>
                     <form>
-                        <div class="form-group">
-                            <label for="teddyColor">Couleur</label>
-                            <input type="select" id="teddyColor" class="form-control" required />
+                        <div class="form-group mb-5">
+                            <label for="teddyColor" class="h5">Couleur</label>
+                            <select name="color" id="teddyColor" class="form-control product__form" required>
+                                <template id="colorOption">
+                                    <option></option>
+                                </template>
+                            </select>
                         </div>
-                        <button type="submit" class="btn">Je le veux</button>
+                        <button type="submit" class="btn shadow-sm px-4 py-2">Je le veux</button>
                     </form>
                 </div>
             </div>
