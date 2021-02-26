@@ -1,4 +1,5 @@
 const apiUrl = "http://localhost:3000/api/teddies";
+const productPageUrlFromIndex = "./pages/product.html";
 
 // Récupère une liste d'objets JSON correspondant à tous les items 
 const getTeddies = () => {
@@ -49,7 +50,7 @@ async function getTeddyById(teddyIDIndex = Number) {
     });
     //console.log("IDs List: " + teddiesIDsList);
     let selectedTeddy = await getSpecificTeddy(teddiesIDsList[teddyIDIndex]);
-    console.log(selectedTeddy);
+    //console.log(selectedTeddy);
     return selectedTeddy;
 };
 
@@ -67,9 +68,66 @@ async function createProductCards() {
         clone.querySelector(".card-text").innerHTML = price + "€";
         clone.querySelector(".card-img-top").setAttribute("src", product.imageUrl);
         clone.querySelector(".card-img-top").setAttribute("alt", "Peluche " + product.name);
+        clone.querySelector(".card-link").setAttribute("href", productPageUrlFromIndex + "?id=" + product.name);
         productCards.appendChild(clone);
     });
 };
 
 createProductCards();
 
+// Remplit le DOM de la page de fiche produit avec les infos récupérées dans l'API
+const displayProductSheet = ($teddyName = Promise) => {
+    const productSheet = document.querySelector("#productSheet");
+    const pageTitle = document.querySelector("title");
+    const titleGeneral = " | Orinoteddies par Orinoco";
+    $teddyName.then((product) => {
+        console.log(product);
+        pageTitle.innerHTML = product.name + titleGeneral;
+        productSheet.querySelector(".product__img__pic").setAttribute("src", product.imageUrl);
+        productSheet.querySelector(".product__img__pic").setAttribute("alt", "Peluche " + product.name);
+        productSheet.querySelector(".product__txt__name").innerHTML = product.name;
+        let price = product.price / 100;
+        productSheet.querySelector(".product__txt__price").innerHTML = price + "€";
+        productSheet.querySelector(".product__txt__description").innerHTML = product.description;
+    });
+};
+
+// Regarde l'URL de la page actuelle et si elle contient en id le nom d'une peluche, récupère l'objet correspondant depuis l'API puis appelle displayProductSheet pour cette peluche
+async function createProductPage() {
+    let currentPageUrl = window.location.href;
+    let searchPageUrl = new URLSearchParams(currentPageUrl);
+    for (let p of searchPageUrl) {
+        let currentPageId = p[1];
+        switch (currentPageId) {
+            case "Norbert":
+                console.log("Vous êtes sur la page de Norbert");
+                let norbert = getTeddyById(0);
+                displayProductSheet(norbert);
+                break;
+            case "Arnold":
+                console.log("Vous êtes sur la page d'Arnold");
+                let arnold = getTeddyById(1);
+                displayProductSheet(arnold);
+                break;    
+            case "Lenny and Carl":
+                console.log("Vous êtes sur la page de Lenny et Carl");
+                let lenny = getTeddyById(2);
+                displayProductSheet(lenny);
+                break;
+            case "Gustav":
+                console.log("Vous êtes sur la page de Gustav");
+                let gustav = getTeddyById(3);
+                displayProductSheet(gustav);
+                break;
+            case "Garfunkel":
+                console.log("Vous êtes sur la page de Garfunkel");
+                let garfunkel = getTeddyById(4);
+                displayProductSheet(garfunkel);
+                break;
+            default:
+                console.log("Vous n'êtes pas sur une page produit");
+        }
+    }
+}
+
+createProductPage();
