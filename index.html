@@ -8,68 +8,89 @@
         <meta name="description" content="Vous cherchez des peluches de qualité qui ne sortent pas à la chaîne d'usines? Orinoco a la solution pour vous! Avec Orinoteddies, achetez des ours en peluche de qualité faits entièrement à la main." />
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/style.css" />
     </head>
 
     <body>
-        <header class="container header">
-            <div class = "row">
-                <nav class="col navbar navbar-expand-lg">
-                    <a class="navbar-brand header__brand" href="./index.html">Orinoteddies</a>
+        <header class="header">
+            <div class="container header__content">
+                <div class = "row">
+                    <nav class="col navbar navbar-expand-lg header__nav">
+                        <a class="navbar-brand m-0 header__brand logo logo--med" href="./index.html">Orinoteddies</a>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                            <span class="navbar-toggler-icon header__nav__icon"></span>
+                        </button>
 
-                    <div id="navbarContent" class="collapse navbar-collapse">
-                        <ul class="navbar-nav header__nav">
-                            <li class="nav-item active header__nav__item--active">
-                                <a class="nav-link" href="./index.html">Accueil</a>
-                            </li>
-                            <li class="nav-item header__nav__item">
-                                <a class="nav-link" href="./order.html">Mes commandes</a>
-                            </li>
-                            <li class="nav-item header__nav__item">
-                                <a class="nav-link" href="./cart.html">Mon panier</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                        <div id="navbarContent" class="collapse navbar-collapse header__nav__list">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item header__nav__list__item--active" href="./index.html">Accueil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item" href="./order.html">Mes commandes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item" href="./cart.html">Mon panier</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </header>
 
-        <main class="container">
-            <section class="jumbotron hero">
-                <h1>Avec <strong>Orinoteddies</strong>, achetez des ours en peluches de qualité faits entièrement à la main.</h1>
-                <p><strong>Orinoteddies</strong> par <strong>Orinoco</strong>.</p>
+        <main class="content">
+            <section class="container">
+                <div class="jumbotron hero">
+                    <div class="hero__txt">
+                        <h1 class="col-9 hero__title font-weight-bold">Avec <strong class="logo logo--secondary logo--big">Orinoteddies</strong>, achetez des ours en peluches de qualité faits entièrement à la main.</h1>
+                        <p class="hero__subtitle h5"><strong class="logo logo--secondary h3">Orinoteddies</strong> par <strong>Orinoco</strong>.</p>
+                    </div>
+                </div>
             </section>
 
-            <section class="container-fluid">
-                <div class="row">
-                    <h2 class="col">Nos produits</h2>
-                </div>
-
-                <template id="product">
-                    <div class="card col-4">
-                        <img class="card-img-top" />
-                        <div class="card-body">
-                            <h3 class="card-title"></h3>
-                            <p class="card-text"></p>
-                            <a class="card-link stretched-link">Voir le produit</a>
-                        </div>
+            <section class="grid py-5">
+                <div class="container grid__content">
+                    <div class="row mb-5">
+                        <h2 class="col px-0 mx-3 grid__title">Nos produits</h2>
                     </div>
-                </template>        
 
-                <div id="products" class="row"></div>
+                    <template id="product" class="grid__elements">
+                        <div class="col">
+                            <div class="card p-0 shadow grid__item">
+                                <div class="grid__item__pic">
+                                    <img class="card-img-top grid__item__pic__img" />
+                                </div>
+                                <div class="card-body grid__item__txt">
+                                    <h3 class="card-title grid__item__txt__name"></h3>
+                                    <p class="card-text h6 grid__item__txt__price"></p>
+                                    <a class="card-link stretched-link grid__item__txt__link">Voir le produit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </template>        
+
+                    <div id="products" class="row"></div>
+                </div>
+            </section>
+
+            <section class="container tagline">
+                <div class="jumbotron">
+                    <h2 class="tagline__txt">Et vous, pour lequel allez-vous craquer?</h2>
+                </div>
             </section>
         </main>
 
-        <footer class="container">
-            <div class="row">
-                <ul class="col list-inline text-center">
-                    <li class="list-inline-item mx-4"><a href="">A propos</a></li>
-                    <li class="list-inline-item mx-4"><a href="">Conditions générales de vente</a></li>
-                    <li class="list-inline-item mx-4"><a href="">Contact</a></li>
-                </ul>
+        <footer class="footer">
+            <div class= "container footer__content">
+                <div class="row">
+                    <ul class="col list-inline footer__list">
+                        <li class="list-inline-item mx-4"><a class="footer__list__item" href="">A propos</a></li>
+                        <li class="list-inline-item mx-4"><a class="footer__list__item" href="">Conditions générales de vente</a></li>
+                        <li class="list-inline-item mx-4"><a class="footer__list__item" href="">Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </footer>
 

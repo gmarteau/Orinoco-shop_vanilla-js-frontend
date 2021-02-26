@@ -1,0 +1,19 @@
+.footer {
+    height: $ftr-height;
+    background-color: $clr-secondary;
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;    
+    }
+    &__list {
+        &__item {
+            color: #fff;
+            text-decoration: none;
+            &:hover {
+                color: $clr-tertiary;
+                text-decoration: underline;
+            }
+        }
+    }
+}

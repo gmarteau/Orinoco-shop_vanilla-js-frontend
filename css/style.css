@@ -1,0 +1,210 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100%;
+  margin: 0;
+}
+
+.container {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "latoregular";
+  src: url("../fonts/lato-regular-webfont.eot");
+  src: url("../fonts/lato-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/lato-regular-webfont.woff2") format("woff2"), url("../fonts/lato-regular-webfont.woff") format("woff"), url("../fonts/lato-regular-webfont.ttf") format("truetype"), url("../fonts/lato-regular-webfont.svg#latoregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "sweet_purpleregular";
+  src: url("../fonts/sweet_purple-webfont.eot");
+  src: url("../fonts/sweet_purple-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/sweet_purple-webfont.woff2") format("woff2"), url("../fonts/sweet_purple-webfont.woff") format("woff"), url("../fonts/sweet_purple-webfont.ttf") format("truetype"), url("../fonts/sweet_purple-webfont.svg#sweet_purpleregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+*:not(.logo) {
+  font-family: "latoregular", sans-serif;
+}
+
+.header {
+  height: 80px;
+  background-color: #4db3ad;
+}
+.header__content {
+  display: flex;
+  align-items: flex-end;
+}
+.header__content > .row {
+  width: 100%;
+}
+.header__brand {
+  font-size: 1.75rem;
+}
+.header__brand:hover {
+  color: #DDF71D;
+}
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+}
+.header__nav__icon {
+  color: #fff;
+}
+.header__nav__list {
+  max-width: max-content;
+}
+.header__nav__list__item {
+  color: #fff;
+  position: relative;
+}
+.header__nav__list__item::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: -8px;
+  left: 0;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 150ms ease-in-out;
+}
+.header__nav__list__item:hover {
+  color: #fff;
+}
+.header__nav__list__item:hover::after {
+  transform: scaleX(1);
+}
+.header__nav__list__item.header__nav__list__item--active {
+  color: #DDF71D;
+}
+.header__nav__list__item.header__nav__list__item--active::after {
+  background-color: #DDF71D;
+}
+.header__nav__list__item.header__nav__list__item--active:hover {
+  color: #DDF71D;
+}
+
+.hero {
+  height: 500px;
+}
+.hero__txt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #0f2229;
+  font-weight: bold;
+}
+
+.grid {
+  background-color: #4db3ad;
+  color: #0f2229;
+  height: auto;
+}
+.grid__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.grid__title {
+  color: #fff;
+  font-weight: bold;
+  position: relative;
+}
+.grid__title::after {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 4px;
+  background-color: #fff;
+  bottom: -30%;
+  left: 0;
+}
+.grid__item {
+  height: 300px;
+  border-radius: 2rem;
+  border: solid 5px #fff;
+  overflow: hidden;
+}
+.grid__item__pic {
+  height: 176.4705882353px;
+  position: relative;
+  overflow: hidden;
+}
+.grid__item__pic__img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.grid__item__txt {
+  color: #0f2229;
+}
+.grid__item__txt__name {
+  font-family: "sweet_purpleregular", sans-serif;
+  font-size: 2.3rem;
+}
+.grid__item__txt__price {
+  font-weight: bold;
+}
+.grid__item__txt__link {
+  color: #4db3ad;
+  font-weight: bold;
+  text-decoration: none;
+}
+.grid__item__txt__link:hover {
+  cursor: pointer;
+  color: #0f2229;
+  text-decoration: underline;
+}
+
+.tagline {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f2229;
+}
+
+.footer {
+  height: 80px;
+  background-color: #4db3ad;
+}
+.footer__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer__list__item {
+  color: #fff;
+  text-decoration: none;
+}
+.footer__list__item:hover {
+  color: #0f2229;
+  text-decoration: underline;
+}
+
+.logo {
+  font-family: "sweet_purpleregular", sans-serif;
+  color: #DDF71D;
+}
+.logo.logo--secondary {
+  color: #4db3ad;
+}
+.logo.logo--med {
+  font-size: 2rem;
+}
+.logo.logo--big {
+  font-size: 4rem;
+}
+
+/*# sourceMappingURL=style.css.map */
