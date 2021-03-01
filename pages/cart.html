@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
+        <title>Mon panier | Orinoteddies par Orinoco</title>
         <meta name="description" content="Vous cherchez des peluches de qualité qui ne sortent pas à la chaîne d'usines? Orinoco a la solution pour vous! Avec Orinoteddies, achetez des ours en peluche de qualité faits entièrement à la main." />
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -30,8 +30,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item" href="./order.html">Mes commandes</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item" href="./cart.html">Mon panier</a>
+                                <li class="nav-item active">
+                                    <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item header__nav__list__item--active" href="./cart.html">Mon panier</a>
                                 </li>
                             </ul>
                         </div>
@@ -40,43 +40,57 @@
             </div>
         </header>
 
-        <main class="container product">
-            <div class="row py-5 product__content" id="productSheet">
-                <div class="col-8 shadow product__pic">
-                        <img class="product__pic__img" />
-                </div>
-                <div class="col-4 px-5 product__txt">
-                    <h1 class="product__txt__name"></h1>
-                    <p class="h3 mb-4 product__txt__price"></p>
-                    <p class="h5 mb-5 product__txt__description"></p>
-                    <form>
-                        <div class="form-group mb-3">
-                            <label for="teddyColor" class="h5">Couleur</label>
-                            <select name="color" id="teddyColor" class="form-control product__form" required>
-                                <template id="colorOption">
-                                    <option></option>
-                                </template>
-                            </select>
+        <main>
+            <section id="cartList" class="container cart">
+                <template id="cartItem">
+                    <div class="row cart__item">
+                        <div class="col-4 cart__item__pic">
+                            <img class="cart__item__pic__img" />
                         </div>
-                        <div class="form-group mb-5">
-                            <label for="teddyQuantity" class="h5">Quantité</label>
-                            <select name="quantity" id="teddyQuantity" class="form-control product__form" required>
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
+                        <div class="col-5 cart__item__txt">
+                            <p class="cart__item__txt__name"></p>
+                            <p class="cart__item__txt__quantity"></p>
                         </div>
-                        <button id="addToCart" type="submit" class="btn shadow-sm px-4 py-2">Je le veux</button>
-                    </form>
+                        <p class="col-3 cart__item__price"></p>
+                    </div>
+                </template>
+
+                <div class="row">
+                    <p class="col cart__totalPrice"></p>
                 </div>
-            </div>
+            </section>
+
+            <section class="buyingForm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <form>
+                                <div class="form-group mb-2">
+                                    <label for="firstName">Prénom</label>
+                                    <input type="text" id="firstName" class="form-control" placeholder="Camille" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="lastName">Nom</label>
+                                    <input type="text" id="lastName" class="form-control" placeholder="Dubois" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="address">Adresse</label>
+                                    <input type="text" id="address" class="form-control" placeholder="1 rue des Oliviers" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="city">Ville</label>
+                                    <input type="text" id="city" class="form-control" placeholder="Nantes" required />
+                                </div>
+                                <div class="form-group mb-5">
+                                    <label for="email">Nom</label>
+                                    <input type="email" id="email" class="form-control" placeholder="camille.dubois@gmail.com" required />
+                                </div>
+                                <button id="placeOrder" type="submit" class="btn shadow-sm px-4 py-2 mb-5">Commander</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer class="footer">
@@ -91,8 +105,7 @@
             </div>
         </footer>
 
-
-        <script type="text/javascript" src="../js-front/product-page.js"></script>
+        <script type="text/javascript" src="../js-front/cart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>        
     </body>
 </html>

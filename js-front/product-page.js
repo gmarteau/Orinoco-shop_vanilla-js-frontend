@@ -1,5 +1,5 @@
-const apiUrl = "http://localhost:3000/api/teddies";
 const productPageUrlFromIndex = "./pages/product.html";
+const apiUrl = "http://localhost:3000/api/teddies";
 
 // Récupère une liste d'objets JSON correspondant à tous les items 
 const getTeddies = () => {
@@ -53,27 +53,6 @@ async function getTeddyById(teddyIDIndex = Number) {
     //console.log(selectedTeddy);
     return selectedTeddy;
 };
-
-//getTeddyById(0);
-
-// Crée les cartes de produits de la page d'accueil à partir du template HTML
-async function createProductCards() {
-    const productCardTemplate = document.querySelector("#product");
-    const productCards = document.querySelector("#products");
-    let teddiesList = await getTeddies();
-    teddiesList.forEach((product) => {
-        let clone = document.importNode(productCardTemplate.content, true);
-        clone.querySelector(".card-title").innerHTML = product.name;
-        let price = product.price / 100;
-        clone.querySelector(".card-text").innerHTML = price + "€";
-        clone.querySelector(".card-img-top").setAttribute("src", product.imageUrl);
-        clone.querySelector(".card-img-top").setAttribute("alt", "Peluche " + product.name);
-        clone.querySelector(".card-link").setAttribute("href", productPageUrlFromIndex + "?id=" + product.name);
-        productCards.appendChild(clone);
-    });
-};
-
-createProductCards();
 
 // Remplit le DOM de la page de fiche produit avec les infos récupérées dans l'API
 const displayProductSheet = ($teddyName = Promise) => {
@@ -141,3 +120,38 @@ async function createProductPage() {
 }
 
 createProductPage();
+
+class Product {
+    constructor(name, imgUrl, quantity, totalPrice) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    };
+};
+
+const addProductToCart = (event) => {
+    event.preventDefault();
+    let productName = document.querySelector(".product__txt__name").textContent;
+    let productImgUrl = document.querySelector(".product__pic__img").getAttribute("src");
+    let productPriceString = document.querySelector(".product__txt__price").textContent;
+    let productPrice = parseInt(productPriceString, 10);
+    let productQuantityString = document.querySelector("#teddyQuantity").value;
+    let productQuantity = parseInt(productQuantityString, 10);
+    let totalPrice = productPrice * productQuantity;
+    let productToAddToCart = new Product(
+        productName,
+        productImgUrl,
+        productQuantity,
+        totalPrice
+    );
+    //console.log(productToAddToCart);
+    localStorageList.push(JSON.stringify(productToAddToCart));
+    console.log(localStorageList);
+    localStorage.setItem("productsInCart", JSON.stringify(localStorageList));
+    console.log(localStorage);
+}
+
+let localStorageList = [];
+const addToCartButton = document.querySelector("#addToCart");
+addToCartButton.addEventListener("click", addProductToCart);
