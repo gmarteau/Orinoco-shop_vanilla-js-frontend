@@ -1,4 +1,3 @@
-const productPageUrlFromIndex = "./pages/product.html";
 const apiUrl = "http://localhost:3000/api/teddies";
 
 // Récupère une liste d'objets JSON correspondant à tous les items 

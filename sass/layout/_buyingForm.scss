@@ -1,0 +1,23 @@
+.buyingForm {
+    color: $clr-tertiary;
+    &__content {
+        @include mobile-only {
+            display: flex;
+            justify-content: center;
+        }
+        @include tablet-only {
+            display: flex;
+            justify-content: center;
+        }
+    }
+    &__btn {
+        @include mobile-only {
+            display: flex;
+            justify-content: center;
+        }
+        @include tablet-only {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

@@ -21,3 +21,15 @@
         font-family: 'sweet_purpleregular', sans-serif;
     }
 }
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($map: $breakpoints, $key: sm-max)) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media screen and (min-width: map-get($map: $breakpoints, $key: md-min)) and (max-width: map-get($map: $breakpoints, $key: md-max)) {
+        @content;
+    }
+}

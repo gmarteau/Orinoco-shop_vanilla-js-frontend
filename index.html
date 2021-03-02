@@ -42,9 +42,9 @@
 
         <main class="content">
             <section class="container">
-                <div class="jumbotron hero">
+                <div class="jumbotron px-3 px-lg-0 hero">
                     <div class="hero__txt">
-                        <h1 class="col-9 hero__title font-weight-bold">Avec <strong class="logo logo--secondary logo--big">Orinoteddies</strong>, achetez des ours en peluches de qualité faits entièrement à la main.</h1>
+                        <h1 class="col-12 col-lg-9 hero__title font-weight-bold">Avec <strong class="logo logo--secondary logo--big">Orinoteddies</strong>, achetez des ours en peluches de qualité faits entièrement à la main.</h1>
                         <p class="hero__subtitle h5"><strong class="logo logo--secondary h3">Orinoteddies</strong> par <strong>Orinoco</strong>.</p>
                     </div>
                 </div>
@@ -53,20 +53,24 @@
             <section class="grid py-5">
                 <div class="container grid__content">
                     <div class="row mb-5">
-                        <h2 class="col px-0 mx-3 grid__title">Nos produits</h2>
+                        <h2 class="col px-0 mx-4 mx-lg-3 grid__title">Nos produits</h2>
                     </div>
                     
-                    <div id="products" class="row">
+                    <div id="products" class="row px-2 px-lg-0">
                         <template id="product" class="grid__elements">
-                            <div class="col">
+                            <div class="col-12 col-md-6 col-lg mb-3 mb-lg-0">
                                 <div class="card p-0 shadow grid__item">
                                     <div class="grid__item__pic">
                                         <img class="card-img-top grid__item__pic__img" />
                                     </div>
                                     <div class="card-body grid__item__txt">
-                                        <h3 class="card-title grid__item__txt__name"></h3>
-                                        <p class="card-text h6 grid__item__txt__price"></p>
-                                        <a class="card-link stretched-link grid__item__txt__link link">Voir le produit</a>
+                                        <div class="mb-lg-3">
+                                            <h3 class="card-title mb-lg-0 grid__item__txt__name"></h3>
+                                            <p class="card-text h6 grid__item__txt__price"></p>
+                                        </div>
+                                        <div>
+                                            <a class="card-link stretched-link grid__item__txt__link link">Voir le produit</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +80,8 @@
             </section>
 
             <section class="container tagline">
-                <div class="jumbotron">
-                    <h2 class="tagline__txt">Et vous, pour lequel allez-vous craquer?</h2>
+                <div class="jumbotron px-3 px-lg-0">
+                    <h2 class="text-center tagline__txt">Et vous, pour lequel allez-vous craquer?</h2>
                 </div>
             </section>
         </main>

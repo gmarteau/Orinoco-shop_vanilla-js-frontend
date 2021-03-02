@@ -1,6 +1,9 @@
 .footer {
     height: $ftr-height;
     background-color: $clr-secondary;
+    @include mobile-only {
+        height: $ftr-height * 1.5;
+    }
     &__content {
         display: flex;
         align-items: center;

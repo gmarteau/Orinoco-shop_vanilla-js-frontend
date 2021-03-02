@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
+        <title>Mon panier | Orinoteddies par Orinoco</title>
         <meta name="description" content="Vous cherchez des peluches de qualité qui ne sortent pas à la chaîne d'usines? Orinoco a la solution pour vous! Avec Orinoteddies, achetez des ours en peluche de qualité faits entièrement à la main." />
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -40,49 +40,16 @@
             </div>
         </header>
 
-        <main class="container product">
-            <div class="row py-5 product__content" id="productSheet">
-                <div class="col-12 col-lg-8 mb-4 mb-lg-0 shadow product__pic">
-                        <img class="product__pic__img" />
-                </div>
-                <div class="col-12 col-lg-4 px-4 px-lg-5 product__txt">
-                    <div class="col-md-7 col-lg-12">
-                        <h1 class="product__txt__name"></h1>
-                        <p class="h3 mb-3 mb-md-4 product__txt__price"></p>
-                        <p class="h5 mb-4 mb-lg-5 product__txt__description"></p>
-                    </div>
-                    <form class="col-md-4 col-lg-12 py-md-3 py-lg-0 product__form">
-                        <div class="form-group col-md-12 col-lg mb-3 text-md-right text-lg-left">
-                            <label for="teddyColor" class="h5">Couleur</label>
-                            <select name="color" id="teddyColor" class="form-control product__form__item" required>
-                                <template id="colorOption">
-                                    <option></option>
-                                </template>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-12 col-lg mb-5 mb-md-4 mb-lg-5">
-                            <label for="teddyQuantity" class="h5">Quantité</label>
-                            <select name="quantity" id="teddyQuantity" class="form-control product__form__item" required>
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </div>
-                        <div class="product__btn">
-                            <button id="addToCart" type="submit" class="btn shadow-sm px-4 py-2">Je le veux</button>
-                        </div>
-                    </form>
+        <main>
+            <div class="container">
+                <div class="row">
+                    <h1 class="col-12">Félicitations <span id="firstName">prénom</span>, votre commande a bien été envoyée!</h1>
+                    <p class="col-12">Nous vous remercions pour votre achat d'un montant de <span id="totalPrice"></span>€.<br />
+                        Votre identifiant de commande est le <span id="orderId"></span>.</p>
                 </div>
             </div>
         </main>
- 
+
         <footer class="footer">
             <div class= "container footer__content">
                 <div class="row">
@@ -96,7 +63,7 @@
         </footer>
 
 
-        <script type="text/javascript" src="../js-front/product-page.js"></script>
+        <script type="text/javascript" src="../js-front/confirm.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>        
     </body>
 </html>

@@ -1,0 +1,15 @@
+.cart {
+    color: $clr-tertiary;
+    &__title {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 10%;
+            height: 4px;
+            background-color: $clr-tertiary;
+            bottom: -30%;
+            left: 0;
+        }
+    }
+}

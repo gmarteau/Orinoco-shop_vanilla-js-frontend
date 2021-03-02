@@ -9,6 +9,9 @@
     }
     &.logo--big {
         font-size: 4rem;
+        @include mobile-only {
+            font-size: 3rem;
+        }
     }
 }
 
