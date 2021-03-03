@@ -81,6 +81,7 @@ class Product {
     };
 };
 
+// Crée un objet de classe Product avec les infos récupérées sur la page, l'ajoute à localStorageList qui est ensuite placé dans le localStorage avec la clé "productsInCart"
 const addProductToCart = (event) => {
     event.preventDefault();
     let productName = document.querySelector(".product__txt__name").textContent;
@@ -105,9 +106,24 @@ const addProductToCart = (event) => {
     console.log(localStorage);
 };
 
-let localStorageList = localStorage.getItem("productsInCart");
+// Regarde si la clé "productsInCart" existe dans le localStorage.
+// Si oui, retourne la valeur qui lui correspond, c'est-à-dire une liste d'objets de la classe Product
+// Si non, retourne une liste vide qui pourra être remplie et mise dans le localStorage grâce à la fonction addProductToCart
+const checkLocalStorage = () => {
+    if (localStorage.getItem("productsInCart") == null) {
+        let localStorageList = [];
+        return localStorageList;
+    }
+    else {
+        let localStorageListString = localStorage.getItem("productsInCart");
+        let localStorageList = JSON.parse(localStorageListString);
+        return localStorageList;
+    }
+};
+
+let localStorageList = checkLocalStorage();
 const addToCartButton = document.querySelector("#addToCart");
 addToCartButton.addEventListener("click", addProductToCart);
 
 // localStorage.clear();
-// console.log(localStorage);
+// console.log(localStorage.getItem("productsInCart"));
