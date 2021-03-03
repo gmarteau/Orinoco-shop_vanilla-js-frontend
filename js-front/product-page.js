@@ -126,4 +126,3 @@ const addToCartButton = document.querySelector("#addToCart");
 addToCartButton.addEventListener("click", addProductToCart);
 
 // localStorage.clear();
-// console.log(localStorage.getItem("productsInCart"));

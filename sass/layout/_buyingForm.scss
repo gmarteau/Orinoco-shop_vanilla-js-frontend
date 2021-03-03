@@ -1,5 +1,20 @@
 .buyingForm {
     color: $clr-tertiary;
+    &__title {
+        width: max-content;
+        &__txt {
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                width: 75%;
+                height: 4px;
+                background-color: $clr-tertiary;
+                bottom: -40%;
+                left: 0;
+            }    
+        }
+    }
     &__content {
         @include mobile-only {
             display: flex;

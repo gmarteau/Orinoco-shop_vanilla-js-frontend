@@ -41,31 +41,44 @@
         </header>
 
         <main>
-            <section id="cartList" class="container cart">
-                <div class="row">
-                    <h1 class="col mt-5 px-0 mx-3 cart__title">Mon panier</h1>
+            <section> 
+                <div id="cartList" class="container cart">
+                    <div class="row cart__title">
+                        <h1 class="col my-5 px-0 mx-3 fw-bold cart__title__txt">Mon panier</h1>
+                    </div>
+
+                    <template id="cartItem">
+                        <div class="row mb-3 cart__item">
+                            <div class="col-4 col-md-3 col-lg-2 p-0 cart__item__pic">
+                                <img class="cart__item__pic__img" />
+                            </div>    
+                            <div class="col-5 col-md-6 col-lg-7 px-3 px-md-5 py-3 d-flex flex-column justify-content-between cart__item__txt">
+                                <p class="h3 fw-bold cart__item__txt__name"></p>
+                                <p class="h5 cart__item__txt__quantity"></p>
+                            </div>
+                            <div class="col-2 h5 px-0 py-2 px-md-5 py-md-3 d-flex justify-content-end align-items-end">
+                                <p class="m-0 cart__item__price"></p>
+                            </div>
+                            <div class="col-1 p-0">
+                                <button type="button" class="h4 btn--cross">x</button>
+                            </div>
+                        </div>
+                    </template>
                 </div>
 
-                <template id="cartItem">
-                    <div class="row cart__item">
-                        <div class="col-4 cart__item__pic">
-                            <img class="cart__item__pic__img" />
-                        </div>
-                        <div class="col-5 cart__item__txt">
-                            <p class="cart__item__txt__name"></p>
-                            <p class="cart__item__txt__quantity"></p>
-                        </div>
-                        <p class="col-3 cart__item__price"></p>
+                <div class="container">
+                    <div class="row">
+                        <p class="col my-5 pe-5 h4 fw-bold text-end cart__totalPrice"></p>
                     </div>
-                </template>
-
-                <div class="row">
-                    <p class="col mb-5 cart__totalPrice"></p>
                 </div>
             </section>
 
             <section class="buyingForm">
                 <div class="container">
+                    <div class="row buyingForm__title">
+                        <h2 class="col mb-5 px-0 mx-3 fw-bold buyingForm__title__txt">Je passe commande</h2>
+                    </div>
+
                     <div class="row buyingForm__content">
                         <div class="col-10 col-md-8 col-lg-4">
                             <form>
@@ -93,6 +106,10 @@
                                     <button id="placeOrder" type="submit" class="btn shadow-sm px-4 py-2 mb-5">Commander</button>
                                 </div>
                             </form>
+                        </div>
+
+                        <div class="col-lg-8 pt-5 text-center d-none d-lg-block cart__desktop">
+                            <p class="fw-bold logo logo--secondary logo--bigger">Orinoteddies</p>
                         </div>
                     </div>
                 </div>
