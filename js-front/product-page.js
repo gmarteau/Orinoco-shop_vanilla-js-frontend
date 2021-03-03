@@ -1,27 +1,10 @@
 const apiUrl = "http://localhost:3000/api/teddies";
 
-// Récupère une liste d'objets JSON correspondant à tous les items 
-const getTeddies = () => {
-    const teddies = new Promise((resolve) => {
-        let requestAll = new XMLHttpRequest();
-        requestAll.onreadystatechange = function() {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                resolve(JSON.parse(this.responseText));
-                console.log("Connection with API OK");
-            }
-            else {
-                console.log("Connection with API failed");
-            }
-        };
-        requestAll.open("GET", apiUrl);
-        requestAll.send();
-    });
-    return teddies;
-};
+/* Construction de la page produit
+********************************************/
 
-// Récupère l'objet JSON correspondant au produit en fonction de son ID
-// Prend en paramètre une valeur liste[index] donnée par la fonction getTeddyById(index)
-const getSpecificTeddy = (listSelect) => {
+// Récupère l'objet spécifique correspondant à l"ID du produit donné en paramètre en effectuant une requête de type "apiUrl/productId"
+const getSpecificTeddy = ($pageId) => {
     const specificTeddy = new Promise((resolve) => {
         let requestSpecificTeddy = new XMLHttpRequest();
         requestSpecificTeddy.onreadystatechange = function() {
@@ -33,99 +16,68 @@ const getSpecificTeddy = (listSelect) => {
                 console.log("Connection with API failed");
             }
         };
-        requestSpecificTeddy.open("GET", apiUrl + "/" + listSelect);
+        requestSpecificTeddy.open("GET", apiUrl + "/" + $pageId);
         requestSpecificTeddy.send();
     });
     return specificTeddy;
 };
 
-// Prend en paramètre une valeur d'index pour la liste contenant les IDs de tous les produits
-// Appelle getSpecificTeddy qui retourne un objet JSON
-async function getTeddyById(teddyIDIndex = Number) {
-    let teddiesList = await getTeddies();
-    let teddiesIDsList = [];
-    teddiesList.forEach((teddy) => {
-        teddiesIDsList.push(teddy._id);
-    });
-    //console.log("IDs List: " + teddiesIDsList);
-    let selectedTeddy = await getSpecificTeddy(teddiesIDsList[teddyIDIndex]);
-    //console.log(selectedTeddy);
-    return selectedTeddy;
-};
 
 // Remplit le DOM de la page de fiche produit avec les infos récupérées dans l'API
-const displayProductSheet = ($teddyName = Promise) => {
+const displayProductSheet = ($teddyObject) => {
     const productSheet = document.querySelector("#productSheet");
     const pageTitle = document.querySelector("title");
     const titleGeneral = " | Orinoteddies par Orinoco";
     const colorSelect = document.querySelector("#teddyColor");
     const colorOptionTemplate = document.querySelector("#colorOption");
-    $teddyName.then((product) => {
-        console.log(product);
-        pageTitle.innerHTML = product.name + titleGeneral;
-        productSheet.querySelector(".product__pic__img").setAttribute("src", product.imageUrl);
-        productSheet.querySelector(".product__pic__img").setAttribute("alt", "Peluche " + product.name);
-        productSheet.querySelector(".product__txt__name").innerHTML = product.name;
-        let price = product.price / 100;
-        productSheet.querySelector(".product__txt__price").innerHTML = price + "€";
-        productSheet.querySelector(".product__txt__description").innerHTML = product.description;
-        let colorList = product.colors;
-        console.log(colorList);
-        colorList.forEach((color) => {
-            let clone = document.importNode(colorOptionTemplate.content, true);
-            clone.querySelector("option").setAttribute("value", color);
-            clone.querySelector("option").innerHTML = color;
-            colorSelect.appendChild(clone);
-        });
+    pageTitle.innerHTML = $teddyObject.name + titleGeneral;
+    productSheet.querySelector(".product__pic__img").setAttribute("src", $teddyObject.imageUrl);
+    productSheet.querySelector(".product__pic__img").setAttribute("alt", "Peluche " + $teddyObject.name);
+    productSheet.querySelector(".product__txt__name").innerHTML = $teddyObject.name;
+    let price = $teddyObject.price / 100;
+    productSheet.querySelector(".product__txt__price").innerHTML = price + "€";
+    productSheet.querySelector(".product__txt__description").innerHTML = $teddyObject.description;
+    let colorList = $teddyObject.colors;
+    console.log(colorList);
+    colorList.forEach((color) => {
+        let clone = document.importNode(colorOptionTemplate.content, true);
+        clone.querySelector("option").setAttribute("value", color);
+        clone.querySelector("option").innerHTML = color;
+        colorSelect.appendChild(clone);
     });
 };
 
-// Regarde l'URL de la page actuelle et si elle contient en id le nom d'une peluche, récupère l'objet correspondant depuis l'API puis appelle displayProductSheet pour cette peluche
-async function createProductPage() {
-    let currentPageUrl = window.location.href;
+// Retourne l'ID du produit présent dans l'URL de la page
+const getProductIdFromPageUrl = () => {
+    let currentPageUrl = window.location.search;
     let searchPageUrl = new URLSearchParams(currentPageUrl);
-    for (let p of searchPageUrl) {
-        let currentPageId = p[1];
-        switch (currentPageId) {
-            case "Norbert":
-                console.log("Vous êtes sur la page de Norbert");
-                let norbert = getTeddyById(0);
-                displayProductSheet(norbert);
-                break;
-            case "Arnold":
-                console.log("Vous êtes sur la page d'Arnold");
-                let arnold = getTeddyById(1);
-                displayProductSheet(arnold);
-                break;    
-            case "Lenny and Carl":
-                console.log("Vous êtes sur la page de Lenny et Carl");
-                let lenny = getTeddyById(2);
-                displayProductSheet(lenny);
-                break;
-            case "Gustav":
-                console.log("Vous êtes sur la page de Gustav");
-                let gustav = getTeddyById(3);
-                displayProductSheet(gustav);
-                break;
-            case "Garfunkel":
-                console.log("Vous êtes sur la page de Garfunkel");
-                let garfunkel = getTeddyById(4);
-                displayProductSheet(garfunkel);
-                break;
-            default:
-                console.log("Vous n'êtes pas sur une page produit");
-        }
-    }
-}
+    let pageId = searchPageUrl.get("id");
+    //console.log(pageId);
+    return pageId;
+};
+
+// Regarde l'ID du produit présent dans l'URL de la page à afficher, puis appelle getSpecificTeddy en lui passant cet ID
+// Appelle ensuite displayProdyuctSheet en lui passant l'objet récupéré par getSpecificTeddy pour construire la page
+async function createProductPage() {
+    let pageId = getProductIdFromPageUrl();
+    let teddyCorrespondingToPageId = await getSpecificTeddy(pageId);
+    displayProductSheet(teddyCorrespondingToPageId);    
+};
 
 createProductPage();
 
+
+/* Ajout d'un item au panier
+****************************************************/
+
+// Classe à partir duquel seront créés les objets à envoyer au localStorage
 class Product {
-    constructor(name, imgUrl, quantity, totalPrice) {
+    constructor(name, imgUrl, quantity, totalPrice, productId) {
         this.name = name;
         this.imgUrl = imgUrl;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+        this.productId = productId;
     };
 };
 
@@ -138,19 +90,24 @@ const addProductToCart = (event) => {
     let productQuantityString = document.querySelector("#teddyQuantity").value;
     let productQuantity = parseInt(productQuantityString, 10);
     let totalPrice = productPrice * productQuantity;
+    let productId = getProductIdFromPageUrl();
     let productToAddToCart = new Product(
         productName,
         productImgUrl,
         productQuantity,
-        totalPrice
+        totalPrice,
+        productId
     );
     //console.log(productToAddToCart);
     localStorageList.push(JSON.stringify(productToAddToCart));
-    console.log(localStorageList);
+    //console.log(localStorageList);
     localStorage.setItem("productsInCart", JSON.stringify(localStorageList));
     console.log(localStorage);
-}
+};
 
-let localStorageList = [];
+let localStorageList = localStorage.getItem("productsInCart");
 const addToCartButton = document.querySelector("#addToCart");
 addToCartButton.addEventListener("click", addProductToCart);
+
+// localStorage.clear();
+// console.log(localStorage);

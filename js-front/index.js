@@ -66,7 +66,7 @@ async function createProductCards() {
         clone.querySelector(".card-text").innerHTML = price + "€";
         clone.querySelector(".card-img-top").setAttribute("src", product.imageUrl);
         clone.querySelector(".card-img-top").setAttribute("alt", "Peluche " + product.name);
-        clone.querySelector(".card-link").setAttribute("href", productPageUrlFromIndex + "?id=" + product.name);
+        clone.querySelector(".card-link").setAttribute("href", productPageUrlFromIndex + "?id=" + product._id);
         productCards.appendChild(clone);
     });
 };

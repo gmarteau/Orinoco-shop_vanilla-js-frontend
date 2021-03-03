@@ -19,14 +19,36 @@ const createContact = () => {
     return contact;
 }
 
+// Récupère les IDs des produits du panier en allant les chercher dans les objets présents dans le localStorage
+const createIDsArray = () => {
+    let productsListString = localStorage.getItem("productsInCart");
+    console.log(productsListString);
+    let productsList = JSON.parse(productsListString);
+    console.log(productsList);
+    let IDsArray = [];
+    productsList.forEach((product) => {
+        IDsArray.push(product.productId);
+        console.log(product.productId);
+    })
+    console.log(IDsArray);
+    return IDsArray;
+}
+
 // Envoie les infos relatives à la commande au serveur
 const sendOrder = (event) => {
     event.preventDefault();
     let contact = createContact();
-    console.log(contact);
-    let request = new XMLHttpRequest();
-    request.open("POST", apiUrl + "/order");
-    request.send(JSON.stringify(contact));
+    //console.log(contact);
+    let IDsArray = createIDsArray();
+    //console.log(IDsArray);
+    let order = {
+        contact: contact,
+        IDsArray: IDsArray
+    }
+    console.log(order);
+    // let request = new XMLHttpRequest();
+    // request.open("POST", apiUrl + "/order");
+    // request.send(JSON.stringify(order));
 }
 
 // Appelle sendOrder lorsque l'utilisateur clique sur "Commander"
