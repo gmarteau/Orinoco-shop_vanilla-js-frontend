@@ -1,12 +1,12 @@
 /* Affichage du panier
 ***********************************************************/
 
-const createCartFromLocalStorage = () => {
-    const cartItemTemplate = document.querySelector("#cartItem");
-    const cartList = document.querySelector("#cartList");
-    let productsListString = localStorage.getItem("productsInCart");
-    let productsList = JSON.parse(productsListString);
-    productsList.forEach((product) => {
+const cartItemTemplate = document.querySelector("#cartItem");
+const cartList = document.querySelector("#cartList");
+const cartIsEmpty = document.querySelector("#cartIsEmpty");
+
+const createCartFromLocalStorage = ($productsList) => {
+    $productsList.forEach((product) => {
         let productObject = JSON.parse(product);
         let clone = document.importNode(cartItemTemplate.content, true);
         clone.querySelector(".cart__item__pic__img").setAttribute("src", productObject.imgUrl);
@@ -19,8 +19,6 @@ const createCartFromLocalStorage = () => {
     });
 };
 
-createCartFromLocalStorage();
-
 const calculateTotalPrice = () => {
     const totalPriceHTML = document.querySelector(".cart__totalPrice");
     const itemPrices = document.querySelectorAll(".cart__item__price");
@@ -31,15 +29,25 @@ const calculateTotalPrice = () => {
         pricesAsNumbers.push(priceNumber);
     });
     let totalPrice = pricesAsNumbers.reduce((a, b)=> a + b,0);
-    console.log(totalPrice);
+    //console.log(totalPrice);
     totalPriceHTML.innerHTML = "Total: " + totalPrice + "€"
 };
 
-calculateTotalPrice();
+const checkIfCartIsEmpty = () => {
+    let productsListString = localStorage.getItem("productsInCart");
+    let productsList = JSON.parse(productsListString);
+    if (productsList.length == 0) {
+        cartIsEmpty.textContent = "Votre panier est vide.";
+    }
+    else {
+        createCartFromLocalStorage(productsList);
+        calculateTotalPrice();
+    }
+};
 
+checkIfCartIsEmpty();
 
 const removeItemButtons = document.querySelectorAll(".btn--cross");
-console.log(removeItemButtons);
 
 // Chaque bouton permettant de supprimer un item a pour id l'id de l'item, donc si un bouton est cliqué, on compare son id aux ids des objets contenus dans le localStorage,
 // et on supprime du localStorage l'objet correspondant avant de recharger la page qui ne contient désormais plus l'item
@@ -53,17 +61,13 @@ Array.from(removeItemButtons).forEach((button) => {
             if (itemObject.productId == button.id) {
                 itemsInStorage.splice(itemIndex, 1);
                 localStorage.setItem("productsInCart", JSON.stringify(itemsInStorage));
-                console.log(localStorage);
+                //console.log(localStorage);
                 document.location.reload();
             };
         });    
     });
 });
 
-// removeItemButtons.addEventListener("click", function () {
-//     let buttonId = this.id;
-//     console.log(buttonId);
-// });
 
 /* Envoi de la commande au serveur
 ***********************************************************/
@@ -89,37 +93,66 @@ const createContact = () => {
 }
 
 // Récupère les IDs des produits du panier en allant les chercher dans les objets présents dans le localStorage
-const createIDsArray = () => {
+const createProductsIDsArray = () => {
     let productsListString = localStorage.getItem("productsInCart");
     //console.log(productsListString);
     let productsList = JSON.parse(productsListString);
-    //onsole.log(productsList);
-    let IDsArray = [];
+    //console.log(productsList);
+    let productsIDs = [];
     productsList.forEach((product) => {
         let productObject = JSON.parse(product);
-        IDsArray.push(productObject.productId);
+        productsIDs.push(productObject.productId);
         //console.log(productObject.productId);
     })
-    console.log(IDsArray);
-    return IDsArray;
+    //console.log(productsIDs);
+    return productsIDs;
 }
 
-// Envoie les infos relatives à la commande au serveur
+// Appelle l'api avec le méthode POST et en retourne la réponse
+const callApiWithPOSTMethod = ($JSONToSend) => {
+    const apiResponse = new Promise((resolve) => {
+        let postRequest = new XMLHttpRequest();
+        postRequest.open("POST", apiUrl + "/order");
+        postRequest.setRequestHeader("Content-Type", "application/json");
+        postRequest.setRequestHeader("Accept", "application/json");
+        postRequest.send($JSONToSend);
+        postRequest.onreadystatechange = function() {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+                resolve(JSON.parse(this.responseText));
+                console.log("Connection with API OK");
+            }
+            else {
+                console.log("Connection with API failed");
+            }
+        };
+    });
+    //console.log(apiResponse);
+    return apiResponse;
+};
+
+
+// Envoie les infos relatives à la commande au serveur et récupère sa réponse qui est ensuite ajoutée au localStorage à la clé "lastOrder",
+// puis redirige vers la page de confirmation de commande
 const sendOrder = (event) => {
     event.preventDefault();
     let contact = createContact();
     //console.log(contact);
-    let IDsArray = createIDsArray();
-    //console.log(IDsArray);
+    let productsIDs = createProductsIDsArray();
+    //console.log(productsIDs);
     let order = {
         contact: contact,
-        IDsArray: IDsArray
+        products: productsIDs
     }
-    console.log(order);
-    // let request = new XMLHttpRequest();
-    // request.open("POST", apiUrl + "/order");
-    // request.send(JSON.stringify(order));
-}
+    console.log(JSON.stringify(order));
+    let responseFromApi = callApiWithPOSTMethod(JSON.stringify(order));
+    console.log(responseFromApi);
+    responseFromApi.then((response) => {
+        localStorage.setItem("lastOrderContact", JSON.stringify(response.contact));
+        localStorage.setItem("lastOrderId", JSON.stringify(response.orderId));
+        console.log(localStorage);    
+    });
+    window.location.replace("../pages/confirmation.html");
+};
 
 // Appelle sendOrder lorsque l'utilisateur clique sur "Commander"
 sendOrderButton.addEventListener("click", sendOrder);
