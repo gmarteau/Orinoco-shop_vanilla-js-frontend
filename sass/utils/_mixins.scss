@@ -33,3 +33,7 @@
         @content;
     }
 }
+
+@mixin invalid-input {
+    border: solid 2px #FF0000;
+}

@@ -180,3 +180,43 @@ async function sendOrder(event) {
 
 // Appelle sendOrder lorsque l'utilisateur clique sur "Commander"
 sendOrderButton.addEventListener("click", sendOrder);
+
+const formInputs = document.querySelectorAll("input");
+
+const checkInputValidity = () => {
+    const lettersOnly = /^[A-Za-z]+$/;
+    const lettersAndNumbers = /[\w ]/;
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    formInputs.forEach((input) => {
+        if (input.id == "firstName" || input.id == "lastName" || input.id == "city") {
+            let testInput = lettersOnly.test(input.value);
+            if (testInput == true) {
+                input.style.border = "solid 2px red";
+            }
+            else {
+                input.style.border = "solid 2px green";
+            }
+        }
+        else if (input.id == "address") {
+            let testInput = lettersAndNumbers.test(input.value);
+            if (testInput == true) {
+                input.style.border = "solid 2px red";
+            }
+            else {
+                input.style.border = "solid 2px green";
+            }
+        } else if (input.id == "email") {
+            let testInput = emailRegex.test(input.value);
+            if (testInput == true) {
+                input.style.border = "solid 2px red";
+            }
+            else {
+                input.style.border = "solid 2px green";
+            }
+        }
+    });
+};
+
+Array.from(formInputs).forEach((input) => {
+    input.addEventListener("change", checkInputValidity);
+});

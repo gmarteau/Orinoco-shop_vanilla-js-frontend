@@ -26,13 +26,7 @@
         }
     }
     &__btn {
-        @include mobile-only {
-            display: flex;
-            justify-content: center;
-        }
-        @include tablet-only {
-            display: flex;
-            justify-content: center;
-        }
+        display: flex;
+        justify-content: center;
     }
 }

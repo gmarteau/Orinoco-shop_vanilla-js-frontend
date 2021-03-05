@@ -50,6 +50,7 @@ const displayCartSizeIconInNav = () => {
     }
 };
 
+
 buildConfirmationMessage();
 setTimeout(function() {
     localStorage.clear();

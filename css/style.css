@@ -341,17 +341,9 @@ body {
     justify-content: center;
   }
 }
-@media screen and (max-width: 767px) {
-  .buyingForm__btn {
-    display: flex;
-    justify-content: center;
-  }
-}
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .buyingForm__btn {
-    display: flex;
-    justify-content: center;
-  }
+.buyingForm__btn {
+  display: flex;
+  justify-content: center;
 }
 
 .confirm {
