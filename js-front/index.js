@@ -78,8 +78,10 @@ createProductCards();
 const displayCartSizeIconInNav = () => {
     const cartSizeIconInNav = document.querySelector("#cartSizeIconInNav");
     let productsInCart = localStorage.getItem("productsInCart");
-    let productsInCartList = JSON.parse(productsInCart);
-    console.log(productsInCartList.length);
+    let productsInCartList = [];
+    if (productsInCart !== null) {
+        productsInCartList = JSON.parse(productsInCart);
+    }
     if (productsInCartList.length == 0) {
         cartSizeIconInNav.hidden = true;
     }

@@ -32,5 +32,26 @@ const buildConfirmationMessage = () => {
     confirmPageOrderId.textContent = lastOrderId;
 };
 
+// Récupère la liste des items dans le panier depuis le localStorage, puis en regarde la longueur
+// Si le panier est vide, n'affiche pas l'icone, sinon l'affiche en lui indiquant le nombre d'éléments dans la liste, qui correspond au nombre d'articles dans le panier
+const displayCartSizeIconInNav = () => {
+    const cartSizeIconInNav = document.querySelector("#cartSizeIconInNav");
+    let productsInCart = localStorage.getItem("productsInCart");
+    let productsInCartList = [];
+    if (productsInCart !== null) {
+        productsInCartList = JSON.parse(productsInCart);
+    }
+    if (productsInCartList.length == 0) {
+        cartSizeIconInNav.hidden = true;
+    }
+    else {
+        cartSizeIconInNav.textContent = productsInCartList.length;
+        cartSizeIconInNav.hidden = false;
+    }
+};
+
 buildConfirmationMessage();
-localStorage.clear();
+setTimeout(function() {
+    localStorage.clear();
+    setTimeout(displayCartSizeIconInNav, 100);
+}, 100);

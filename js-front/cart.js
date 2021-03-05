@@ -35,13 +35,18 @@ const calculateTotalPrice = () => {
 
 const checkIfCartIsEmpty = () => {
     let productsListString = localStorage.getItem("productsInCart");
-    let productsList = JSON.parse(productsListString);
-    if (productsList.length == 0) {
+    if (productsListString == null) {
         cartIsEmpty.textContent = "Votre panier est vide.";
     }
     else {
-        createCartFromLocalStorage(productsList);
-        calculateTotalPrice();
+        let productsList = JSON.parse(productsListString);
+        if (productsList.length == 0) {
+            cartIsEmpty.textContent = "Votre panier est vide.";
+        }
+        else {
+            createCartFromLocalStorage(productsList);
+            calculateTotalPrice();
+        }
     }
 };
 
@@ -52,8 +57,10 @@ checkIfCartIsEmpty();
 const displayCartSizeIconInNav = () => {
     const cartSizeIconInNav = document.querySelector("#cartSizeIconInNav");
     let productsInCart = localStorage.getItem("productsInCart");
-    let productsInCartList = JSON.parse(productsInCart);
-    console.log(productsInCartList.length);
+    let productsInCartList = [];
+    if (productsInCart !== null) {
+        productsInCartList = JSON.parse(productsInCart);
+    }
     if (productsInCartList.length == 0) {
         cartSizeIconInNav.hidden = true;
     }
@@ -152,7 +159,7 @@ const callApiWithPOSTMethod = ($JSONToSend) => {
 
 // Envoie les infos relatives à la commande au serveur et récupère sa réponse qui est ensuite ajoutée au localStorage à la clé "lastOrder",
 // puis redirige vers la page de confirmation de commande
-const sendOrder = (event) => {
+async function sendOrder(event) {
     event.preventDefault();
     let contact = createContact();
     //console.log(contact);
@@ -163,13 +170,11 @@ const sendOrder = (event) => {
         products: productsIDs
     }
     console.log(JSON.stringify(order));
-    let responseFromApi = callApiWithPOSTMethod(JSON.stringify(order));
+    let responseFromApi = await callApiWithPOSTMethod(JSON.stringify(order));
     console.log(responseFromApi);
-    responseFromApi.then((response) => {
-        localStorage.setItem("lastOrderContact", JSON.stringify(response.contact));
-        localStorage.setItem("lastOrderId", JSON.stringify(response.orderId));
-        console.log(localStorage);    
-    });
+    localStorage.setItem("lastOrderContact", JSON.stringify(responseFromApi.contact));
+    localStorage.setItem("lastOrderId", JSON.stringify(responseFromApi.orderId));
+    console.log(localStorage);
     window.location.replace("../pages/confirmation.html");
 };
 
