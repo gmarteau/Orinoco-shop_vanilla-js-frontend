@@ -440,4 +440,46 @@ body {
   background-color: inherit;
 }
 
+.navcart {
+  position: relative;
+}
+.navcart__icon {
+  position: absolute;
+  top: -5px;
+  right: -15px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #4db3ad;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .navcart__icon {
+    top: 0;
+    right: 32px;
+    width: 15px;
+    height: 15px;
+    font-size: 0.7rem;
+  }
+}
+.navcart__alert {
+  position: absolute;
+  bottom: -320%;
+  left: -75%;
+  color: #0f2229;
+  width: 200%;
+  font-size: 1rem;
+  font-style: normal;
+  background-color: #fff;
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
 /*# sourceMappingURL=style.css.map */

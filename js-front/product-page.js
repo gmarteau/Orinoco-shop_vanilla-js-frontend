@@ -66,6 +66,24 @@ async function createProductPage() {
 
 createProductPage();
 
+// Récupère la liste des items dans le panier depuis le localStorage, puis en regarde la longueur
+// Si le panier est vide, n'affiche pas l'icone, sinon l'affiche en lui indiquant le nombre d'éléments dans la liste, qui correspond au nombre d'articles dans le panier
+const displayCartSizeIconInNav = () => {
+    const cartSizeIconInNav = document.querySelector("#cartSizeIconInNav");
+    let productsInCart = localStorage.getItem("productsInCart");
+    let productsInCartList = JSON.parse(productsInCart);
+    console.log(productsInCartList.length);
+    if (productsInCartList.length == 0) {
+        cartSizeIconInNav.hidden = true;
+    }
+    else {
+        cartSizeIconInNav.textContent = productsInCartList.length;
+        cartSizeIconInNav.hidden = false;
+    }
+};
+
+displayCartSizeIconInNav();
+
 
 /* Ajout d'un item au panier
 ****************************************************/
@@ -80,6 +98,15 @@ class Product {
         this.productId = productId;
     };
 };
+
+// Affiche une alerte indiquant que le produit a bien été ajouté au panier pendant 2sec en modifiant l'opacité de l'élément
+const showAddedProductAlert = () => {
+    const alert = document.querySelector("#itemAddedToCartAlert");
+    alert.style.opacity = "1";
+    setTimeout(function() {
+        alert.style.opacity = "0";
+    }, 2000);
+}
 
 // Crée un objet de classe Product avec les infos récupérées sur la page, l'ajoute à localStorageList qui est ensuite placé dans le localStorage avec la clé "productsInCart"
 const addProductToCart = (event) => {
@@ -104,6 +131,8 @@ const addProductToCart = (event) => {
     //console.log(localStorageList);
     localStorage.setItem("productsInCart", JSON.stringify(localStorageList));
     console.log(localStorage);
+    showAddedProductAlert();
+    displayCartSizeIconInNav();
 };
 
 // Regarde si la clé "productsInCart" existe dans le localStorage.

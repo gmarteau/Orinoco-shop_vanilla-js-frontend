@@ -33,3 +33,4 @@ const buildConfirmationMessage = () => {
 };
 
 buildConfirmationMessage();
+localStorage.clear();
