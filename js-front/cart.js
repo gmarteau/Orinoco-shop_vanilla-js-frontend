@@ -159,8 +159,7 @@ const callApiWithPOSTMethod = ($JSONToSend) => {
 
 // Envoie les infos relatives à la commande au serveur et récupère sa réponse qui est ensuite ajoutée au localStorage à la clé "lastOrder",
 // puis redirige vers la page de confirmation de commande
-async function sendOrder(event) {
-    //event.preventDefault();
+async function sendOrder() {
     let contact = createContact();
     //console.log(contact);
     let productsIDs = createProductsIDsArray();
@@ -178,45 +177,55 @@ async function sendOrder(event) {
     window.location.replace("../pages/confirmation.html");
 };
 
-// Appelle sendOrder lorsque l'utilisateur clique sur "Commander"
-sendOrderButton.addEventListener("click", sendOrder);
-
+// On récupère les inputs et les messages d'erreur, qui sont cachés par défaut
 const formInputs = document.querySelectorAll("input");
+const errorMessages = document.querySelectorAll(".buyingForm__error");
+errorMessages.forEach((error) => {
+    error.hidden = true;
+});
 
-// const checkInputValidity = () => {
-//     const lettersOnly = /^[A-Za-z]+$/;
-//     const lettersAndNumbers = /[\w ]/;
-//     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//     formInputs.forEach((input) => {
-//         if (input.id == "firstName" || input.id == "lastName" || input.id == "city") {
-//             let testInput = lettersOnly.test(input.value);
-//             if (testInput == true) {
-//                 input.style.border = "solid 2px red";
-//             }
-//             else {
-//                 input.style.border = "solid 2px green";
-//             }
-//         }
-//         else if (input.id == "address") {
-//             let testInput = lettersAndNumbers.test(input.value);
-//             if (testInput == true) {
-//                 input.style.border = "solid 2px red";
-//             }
-//             else {
-//                 input.style.border = "solid 2px green";
-//             }
-//         } else if (input.id == "email") {
-//             let testInput = emailRegex.test(input.value);
-//             if (testInput == true) {
-//                 input.style.border = "solid 2px red";
-//             }
-//             else {
-//                 input.style.border = "solid 2px green";
-//             }
-//         }
-//     });
-// };
+// Pour un input donné, on vérifie sa validité: s'il est invalide, on lui ajoute la classe .error qui ajoute une bordure rouge et on révèle le message d'erreur;
+// si l'input est valide, le message est à nouveau caché et la classe .error est retirée, la bordure devient verte (style de input:valid)
+const checkSingleInputValidity = ($input) => {
+    let inputId = $input.id;
+    let inputIdAsSelector = "#" + inputId;
+    let errorAfterInput = inputIdAsSelector + " + .buyingForm__error";
+    let error = document.querySelector(errorAfterInput);
+    if ($input.validity.valid == false) {
+        $input.classList.add("error");
+        error.hidden = false;
+    }
+    else {
+        $input.classList.remove("error");
+        error.hidden = true;
+    }
+};
 
-// Array.from(formInputs).forEach((input) => {
-//     input.addEventListener("change", checkInputValidity);
-// });
+// Ajoute un eventListener "change" pour chaque input du document qui appelle la fonction checkSingleInputValidity en lui passant l'input en question
+Array.from(formInputs).forEach((input) => {
+    input.addEventListener("change", function() {
+        checkSingleInputValidity(input);
+    });
+});
+
+// Règle de validité appelée en callback avec la méthode array.every() dans checkAllInputsBeforeSubmitting
+const isValid = (currentValue) => currentValue.validity.valid == true;
+
+
+// Vérifie si tous les inputs du document sont valides: si l'un d'entre eux ne l'est pas, bloque l'envoi du formulaire;
+// si tout est valide, sendOrder est appelée
+const checkAllInputsBeforeSubmitting = (event) => {
+    event.preventDefault();
+    console.log(Array.from(formInputs).every(isValid));
+    if (Array.from(formInputs).every(isValid) == false) {
+        console.log("Erreurs dans le formulaire");
+    }
+    else {
+        console.log("Formulaire OK");
+        sendOrder();
+    }
+};
+
+// Écoute l'événement "submit" qui correspond au clic sur "Commander", et appelle checkAllInputBeforeSubmitting, qui envoie le formulaire au serveur si tous les inputs sont valides
+const form = document.querySelector("form");
+form.addEventListener("submit", checkAllInputsBeforeSubmitting);

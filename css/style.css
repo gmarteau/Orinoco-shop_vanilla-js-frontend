@@ -11,13 +11,6 @@ body {
   height: 100%;
 }
 
-input:valid {
-  border: solid 2px #27be6e;
-}
-input:invalid {
-  border: solid 2px #dc0005;
-}
-
 @font-face {
   font-family: "latoregular";
   src: url("../fonts/lato-regular-webfont.eot");
@@ -351,6 +344,16 @@ input:invalid {
 .buyingForm__btn {
   display: flex;
   justify-content: center;
+}
+.buyingForm__error {
+  border-radius: 1rem;
+}
+
+input:valid {
+  border: solid 2px #27be6e;
+}
+input.error {
+  border: solid 2px #dc0005;
 }
 
 .confirm {

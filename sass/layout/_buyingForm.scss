@@ -29,4 +29,16 @@
         display: flex;
         justify-content: center;
     }
+    &__error {
+        border-radius: 1rem;
+    }
+}
+
+input {
+    &:valid {
+        @include input-state(valid);
+    }
+    &.error {
+        @include input-state(invalid);
+    }
 }

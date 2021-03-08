@@ -112,6 +112,7 @@ const showAddedProductAlert = () => {
     }, 2000);
 }
 
+// Même chose pour la version desktop, qui n'affiche pas le message au même endroit sur la page
 const showAddedProductAlertDesktop = () => {
     const alertDesktop = document.querySelector("#itemAddedToCartAlertDesktop");
     alertDesktop.style.opacity = "1";
