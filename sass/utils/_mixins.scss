@@ -34,6 +34,11 @@
     }
 }
 
-@mixin invalid-input {
-    border: solid 2px #FF0000;
+@mixin input-state($state) {
+    @if ($state == "valid") {
+        border: solid 2px $clr-valid;
+    }
+    @else if ($state == "invalid") {
+        border: solid 2px $clr-invalid;
+    }
 }

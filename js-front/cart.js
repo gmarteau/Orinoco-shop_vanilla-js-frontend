@@ -160,7 +160,7 @@ const callApiWithPOSTMethod = ($JSONToSend) => {
 // Envoie les infos relatives à la commande au serveur et récupère sa réponse qui est ensuite ajoutée au localStorage à la clé "lastOrder",
 // puis redirige vers la page de confirmation de commande
 async function sendOrder(event) {
-    event.preventDefault();
+    //event.preventDefault();
     let contact = createContact();
     //console.log(contact);
     let productsIDs = createProductsIDsArray();
@@ -183,40 +183,40 @@ sendOrderButton.addEventListener("click", sendOrder);
 
 const formInputs = document.querySelectorAll("input");
 
-const checkInputValidity = () => {
-    const lettersOnly = /^[A-Za-z]+$/;
-    const lettersAndNumbers = /[\w ]/;
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    formInputs.forEach((input) => {
-        if (input.id == "firstName" || input.id == "lastName" || input.id == "city") {
-            let testInput = lettersOnly.test(input.value);
-            if (testInput == true) {
-                input.style.border = "solid 2px red";
-            }
-            else {
-                input.style.border = "solid 2px green";
-            }
-        }
-        else if (input.id == "address") {
-            let testInput = lettersAndNumbers.test(input.value);
-            if (testInput == true) {
-                input.style.border = "solid 2px red";
-            }
-            else {
-                input.style.border = "solid 2px green";
-            }
-        } else if (input.id == "email") {
-            let testInput = emailRegex.test(input.value);
-            if (testInput == true) {
-                input.style.border = "solid 2px red";
-            }
-            else {
-                input.style.border = "solid 2px green";
-            }
-        }
-    });
-};
+// const checkInputValidity = () => {
+//     const lettersOnly = /^[A-Za-z]+$/;
+//     const lettersAndNumbers = /[\w ]/;
+//     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//     formInputs.forEach((input) => {
+//         if (input.id == "firstName" || input.id == "lastName" || input.id == "city") {
+//             let testInput = lettersOnly.test(input.value);
+//             if (testInput == true) {
+//                 input.style.border = "solid 2px red";
+//             }
+//             else {
+//                 input.style.border = "solid 2px green";
+//             }
+//         }
+//         else if (input.id == "address") {
+//             let testInput = lettersAndNumbers.test(input.value);
+//             if (testInput == true) {
+//                 input.style.border = "solid 2px red";
+//             }
+//             else {
+//                 input.style.border = "solid 2px green";
+//             }
+//         } else if (input.id == "email") {
+//             let testInput = emailRegex.test(input.value);
+//             if (testInput == true) {
+//                 input.style.border = "solid 2px red";
+//             }
+//             else {
+//                 input.style.border = "solid 2px green";
+//             }
+//         }
+//     });
+// };
 
-Array.from(formInputs).forEach((input) => {
-    input.addEventListener("change", checkInputValidity);
-});
+// Array.from(formInputs).forEach((input) => {
+//     input.addEventListener("change", checkInputValidity);
+// });

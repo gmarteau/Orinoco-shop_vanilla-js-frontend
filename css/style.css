@@ -11,6 +11,13 @@ body {
   height: 100%;
 }
 
+input:valid {
+  border: solid 2px #27be6e;
+}
+input:invalid {
+  border: solid 2px #dc0005;
+}
+
 @font-face {
   font-family: "latoregular";
   src: url("../fonts/lato-regular-webfont.eot");
@@ -460,6 +467,15 @@ body {
     font-size: 0.7rem;
   }
 }
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .navcart__icon {
+    top: 0;
+    right: 32px;
+    width: 15px;
+    height: 15px;
+    font-size: 0.7rem;
+  }
+}
 .navcart__alert {
   position: absolute;
   bottom: -320%;
@@ -472,6 +488,18 @@ body {
   border-radius: 1rem;
   opacity: 0;
   transition: opacity 500ms ease-in-out;
+}
+@media screen and (max-width: 767px) {
+  .navcart__alert {
+    top: 99%;
+    left: 20%;
+    width: 60%;
+    height: max-content;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform opacity 300ms ease-in-out;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

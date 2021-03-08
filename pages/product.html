@@ -34,7 +34,7 @@
                                     <a class="nav-link h5 mx-3 my-0 p-0 header__nav__list__item navcart" href="./cart.html">
                                         Mon panier
                                         <i id="cartSizeIconInNav" class="navcart__icon"></i>
-                                        <i id="itemAddedToCartAlert" class="shadow-sm p-3 text-center navcart__alert">
+                                        <i id="itemAddedToCartAlertDesktop" class="shadow-sm p-3 text-center d-none d-lg-block navcart__alert">
                                             Ce produit a été ajouté à votre panier
                                         </i>
                                     </a>
@@ -83,6 +83,9 @@
                         </div>
                         <div class="product__btn">
                             <button id="addToCart" type="submit" class="btn shadow-sm px-4 py-2">Je le veux</button>
+                            <i id="itemAddedToCartAlert" class="shadow-sm p-3 text-center d-lg-none navcart__alert">
+                                Ce produit a été ajouté à votre panier
+                            </i>
                         </div>
                     </form>
                 </div>

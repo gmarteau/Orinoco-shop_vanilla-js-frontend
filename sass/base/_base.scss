@@ -10,3 +10,12 @@ body {
 .container {
     height: 100%;
 }
+
+input {
+    &:valid {
+        @include input-state(valid);
+    }
+    &:invalid {
+        @include input-state(invalid);
+    }
+}

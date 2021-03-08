@@ -54,5 +54,5 @@ const displayCartSizeIconInNav = () => {
 buildConfirmationMessage();
 setTimeout(function() {
     localStorage.clear();
-    setTimeout(displayCartSizeIconInNav, 100);
+    setTimeout(displayCartSizeIconInNav, 500);
 }, 100);

@@ -104,9 +104,19 @@ class Product {
 // Affiche une alerte indiquant que le produit a bien été ajouté au panier pendant 2sec en modifiant l'opacité de l'élément
 const showAddedProductAlert = () => {
     const alert = document.querySelector("#itemAddedToCartAlert");
+    alert.style.transform = "scaleY(1)";
     alert.style.opacity = "1";
     setTimeout(function() {
         alert.style.opacity = "0";
+        alert.style.transform = "scaleY(0)";
+    }, 2000);
+}
+
+const showAddedProductAlertDesktop = () => {
+    const alertDesktop = document.querySelector("#itemAddedToCartAlertDesktop");
+    alertDesktop.style.opacity = "1";
+    setTimeout(function() {
+        alertDesktop.style.opacity = "0";
     }, 2000);
 }
 
@@ -134,6 +144,7 @@ const addProductToCart = (event) => {
     localStorage.setItem("productsInCart", JSON.stringify(localStorageList));
     console.log(localStorage);
     showAddedProductAlert();
+    showAddedProductAlertDesktop();
     displayCartSizeIconInNav();
 };
 
