@@ -212,6 +212,18 @@ Array.from(formInputs).forEach((input) => {
     });
 });
 
+const displayMissingDataAlerts = () => {
+    formInputs.forEach((input) => {
+        let inputIdAsSelector = "#" + input.id;
+        let errorAfterInput = inputIdAsSelector + " + .buyingForm__error";
+        let error = document.querySelector(errorAfterInput);
+        if (input.validity.valueMissing == true) {
+            input.classList.add("error");
+            error.hidden = false;
+        }
+    });
+};
+
 // Affiche un message d'alerte indiquant que le panier est vide si l'utilisateur essaie de commander sans porduits dans son panier
 const displayTryingToOrderEmptyCartAlert = () => {
     const cannotOrderEmptyCart = document.querySelector("#cannotOrderEmptyCart");
@@ -234,6 +246,7 @@ const checkAllInputsBeforeSubmitting = (event) => {
     console.log(Array.from(formInputs).every(isValid));
     if (Array.from(formInputs).every(isValid) == false) {
         console.log("Erreurs dans le formulaire");
+        displayMissingDataAlerts();
     }
     else if (cartIsEmpty.textContent == "Votre panier est vide.") {
         console.log("Panier vide");
