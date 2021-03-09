@@ -38,7 +38,7 @@
             opacity: 0;
             transform: scaleY(0);
             transform-origin: bottom;
-            transition: opacity 500 ease-in-out;
+            transition: opacity 500ms ease-in-out;
         }
     }
     &__error {

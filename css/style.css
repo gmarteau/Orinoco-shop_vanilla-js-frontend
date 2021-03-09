@@ -358,7 +358,7 @@ body {
   opacity: 0;
   transform: scaleY(0);
   transform-origin: bottom;
-  transition: opacity 500 ease-in-out;
+  transition: opacity 500ms ease-in-out;
 }
 .buyingForm__error {
   border-radius: 1rem;
@@ -516,7 +516,7 @@ input.error {
     opacity: 0;
     transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform opacity 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -528,7 +528,7 @@ input.error {
     opacity: 0;
     transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform opacity 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
   }
 }
 
