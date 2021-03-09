@@ -5,6 +5,7 @@ const cartItemTemplate = document.querySelector("#cartItem");
 const cartList = document.querySelector("#cartList");
 const cartIsEmpty = document.querySelector("#cartIsEmpty");
 
+// Pour chaque produit présent dans la liste dans le localStorage, remplit le template HTML d'élément du panier avec ses infos
 const createCartFromLocalStorage = ($productsList) => {
     $productsList.forEach((product) => {
         let productObject = JSON.parse(product);
@@ -19,6 +20,7 @@ const createCartFromLocalStorage = ($productsList) => {
     });
 };
 
+// Récupère le prix de chaque élément du panier, les additionne et affiche le prix total du panier
 const calculateTotalPrice = () => {
     const totalPriceHTML = document.querySelector(".cart__totalPrice");
     const itemPrices = document.querySelectorAll(".cart__item__price");
@@ -33,6 +35,8 @@ const calculateTotalPrice = () => {
     totalPriceHTML.innerHTML = "Total: " + totalPrice + "€"
 };
 
+// Regarde si l'élément "productsInCart" existe dans le localStorage, si oui et que c'est une liste non vide, appelle createCartFromLocalStorage en lui passant la liste en question,
+// puis appelle calculateTotalPrice; si non ou que la liste est vide, affiche un message indiquant que le panier est vide
 const checkIfCartIsEmpty = () => {
     let productsListString = localStorage.getItem("productsInCart");
     if (productsListString == null) {
@@ -208,17 +212,32 @@ Array.from(formInputs).forEach((input) => {
     });
 });
 
+// Affiche un message d'alerte indiquant que le panier est vide si l'utilisateur essaie de commander sans porduits dans son panier
+const displayTryingToOrderEmptyCartAlert = () => {
+    const cannotOrderEmptyCart = document.querySelector("#cannotOrderEmptyCart");
+    cannotOrderEmptyCart.style.transform = "scaleY(1)";
+    cannotOrderEmptyCart.style.opacity = "1";
+    setTimeout(function() {
+        cannotOrderEmptyCart.style.transform = "scaleY(0)";
+        cannotOrderEmptyCart.style.opacity = "0";
+    }, 2000);
+};
+
 // Règle de validité appelée en callback avec la méthode array.every() dans checkAllInputsBeforeSubmitting
 const isValid = (currentValue) => currentValue.validity.valid == true;
 
-
 // Vérifie si tous les inputs du document sont valides: si l'un d'entre eux ne l'est pas, bloque l'envoi du formulaire;
+// si le panier est vide, bloque l'envoi du formulaire et affiche un message d'alerte;
 // si tout est valide, sendOrder est appelée
 const checkAllInputsBeforeSubmitting = (event) => {
     event.preventDefault();
     console.log(Array.from(formInputs).every(isValid));
     if (Array.from(formInputs).every(isValid) == false) {
         console.log("Erreurs dans le formulaire");
+    }
+    else if (cartIsEmpty.textContent == "Votre panier est vide.") {
+        console.log("Panier vide");
+        displayTryingToOrderEmptyCartAlert();
     }
     else {
         console.log("Formulaire OK");

@@ -343,7 +343,19 @@ body {
 }
 .buyingForm__btn {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.buyingForm__btn__alert {
+  position: absolute;
+  top: -75%;
+  background-color: #fff;
+  border-radius: 1rem;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: opacity 500 ease-in-out;
 }
 .buyingForm__error {
   border-radius: 1rem;
