@@ -47,6 +47,7 @@
         }
     }
     &__btn {
+        position: relative;
         @include mobile-only {
             display: flex;
             justify-content: center;
