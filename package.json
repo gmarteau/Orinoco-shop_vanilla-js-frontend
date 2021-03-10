@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+    "sass": "sass --watch ./sass/main.scss:./css/style.css",
+    "sass-min": "sass --watch ./sass/main.scss:./css/style-min.css --style compressed",
+    "prefix": "postcss ./css/style-min.css --use autoprefixer -d ./css-prefixed/"
   },
   "author": "",
   "license": "ISC",

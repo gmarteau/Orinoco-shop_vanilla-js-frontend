@@ -38,9 +38,12 @@ const displayProductSheet = ($teddyObject) => {
     productSheet.querySelector(".product__txt__price").innerHTML = price + "€";
     productSheet.querySelector(".product__txt__description").innerHTML = $teddyObject.description;
     let colorList = $teddyObject.colors;
-    console.log(colorList);
+    //console.log(colorList);
     colorList.forEach((color) => {
         let clone = document.importNode(colorOptionTemplate.content, true);
+        if (color == colorList[0]) {
+            clone.querySelector("option").setAttribute("selected", "");
+        }
         clone.querySelector("option").setAttribute("value", color);
         clone.querySelector("option").innerHTML = color;
         colorSelect.appendChild(clone);

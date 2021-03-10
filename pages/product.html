@@ -8,7 +8,7 @@
         <meta name="description" content="Vous cherchez des peluches de qualité qui ne sortent pas à la chaîne d'usines? Orinoco a la solution pour vous! Avec Orinoteddies, achetez des ours en peluche de qualité faits entièrement à la main." />
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css-prefixed/style-min.css" />
     </head>
 
     <body>
@@ -61,7 +61,7 @@
                         <div class="form-group col-md-12 col-lg mb-3 text-md-right text-lg-left">
                             <label for="teddyColor" class="h5 fw-bold">Couleur</label>
                             <select name="color" id="teddyColor" class="form-control product__form__item" required>
-                                <option value="">Choose</option>
+                                <option value="" class="fst-italic">Couleurs</option>
                                 <template id="colorOption">
                                     <option>Color</option>
                                 </template>
@@ -70,7 +70,7 @@
                         <div class="form-group col-md-12 col-lg mb-5 mb-md-4 mb-lg-5">
                             <label for="teddyQuantity" class="h5 fw-bold">Quantité</label>
                             <select name="quantity" id="teddyQuantity" class="form-control product__form__item" required>
-                                <option value="">Choose</option>
+                                <option value="" class="fst-italic">Quantité</option>
                                 <option value="1" selected>1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
