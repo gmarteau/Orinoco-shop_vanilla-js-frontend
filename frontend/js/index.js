@@ -20,23 +20,6 @@ const getTeddies = () => {
     return teddies;
 };
 
-// // Récupère une liste d'objets JSON correspondant à tous les items 
-// const getTeddies = () => {
-//     let requestAll = new XMLHttpRequest();
-//     requestAll.onreadystatechange = function() {
-//         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-//             console.log("Connection with API OK");
-//             let products = JSON.parse(this.responseText);
-//             return products;
-//         }
-//         else {
-//             console.log("Connection with API failed");
-//         }
-//     };
-//     requestAll.open("GET", apiUrl);
-//     requestAll.send();
-// };
-
 // Récupère l'objet JSON correspondant au produit en fonction de son ID
 // Prend en paramètre une valeur liste[index] donnée par la fonction getTeddyById(index)
 const getSpecificTeddy = (listSelect) => {

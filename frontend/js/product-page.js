@@ -39,7 +39,6 @@ const displayProductSheet = ($teddyObject) => {
         productSheet.querySelector(".product__txt__price").innerHTML = price + "€";
         productSheet.querySelector(".product__txt__description").innerHTML = product.description;
         let colorList = product.colors;
-        console.log(colorList);
         colorList.forEach((color) => {
             let clone = document.importNode(colorOptionTemplate.content, true);
             if (color == colorList[0]) {
@@ -71,7 +70,8 @@ const getTeddies = () => {
     return teddies;
 };
 
-// Retourne l'ID du produit présent dans l'URL de la page
+// Regarde l'id présent dans l'URL: s'il correspond à celui d'un produit présent dans l'API, affiche la page produit correspondante;
+// si l'id ne correspond à aucun objet de l'API, affiche un message indiquant que le produit n'existe pas
 async function compareUrlIDWithApiIDsList() {
     let currentPageUrl = window.location.search;
     let searchPageUrl = new URLSearchParams(currentPageUrl);
@@ -97,7 +97,6 @@ async function compareUrlIDWithApiIDsList() {
 // Appelle ensuite displayProdyuctSheet en lui passant l'objet récupéré par getSpecificTeddy pour construire la page
 async function createProductPage() {
     let pageIdAsAPromise = compareUrlIDWithApiIDsList();
-    console.log(pageIdAsAPromise);
     pageIdAsAPromise.then(pageId => {
         if (typeof pageId !== "undefined") {
             let teddyCorrespondingToPageId = getSpecificTeddy(pageId);
@@ -173,7 +172,9 @@ const addProductToCart = (event) => {
     let productQuantityString = document.querySelector("#teddyQuantity").value;
     let productQuantity = parseInt(productQuantityString, 10);
     let totalPrice = productPrice * productQuantity;
-    let productId = getProductIdFromPageUrl();
+    let currentPageUrl = window.location.search;
+    let searchPageUrl = new URLSearchParams(currentPageUrl);
+    let productId = searchPageUrl.get("id");
     let productToAddToCart = new Product(
         productName,
         productImgUrl,
@@ -181,11 +182,8 @@ const addProductToCart = (event) => {
         totalPrice,
         productId
     );
-    //console.log(productToAddToCart);
     localStorageList.push(JSON.stringify(productToAddToCart));
-    //console.log(localStorageList);
     localStorage.setItem("productsInCart", JSON.stringify(localStorageList));
-    console.log(localStorage);
     showAddedProductAlert();
     showAddedProductAlertDesktop();
     displayCartSizeIconInNav();

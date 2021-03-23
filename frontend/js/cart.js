@@ -31,7 +31,6 @@ const calculateTotalPrice = () => {
         pricesAsNumbers.push(priceNumber);
     });
     let totalPrice = pricesAsNumbers.reduce((a, b)=> a + b,0);
-    //console.log(totalPrice);
     totalPriceHTML.innerHTML = "Total: " + totalPrice + "€"
 };
 
@@ -90,7 +89,6 @@ Array.from(removeItemButtons).forEach((button) => {
             if (itemObject.productId == button.id) {
                 itemsInStorage.splice(itemIndex, 1);
                 localStorage.setItem("productsInCart", JSON.stringify(itemsInStorage));
-                //console.log(localStorage);
                 document.location.reload();
             };
         });
@@ -125,16 +123,12 @@ const createContact = () => {
 // Récupère les IDs des produits du panier en allant les chercher dans les objets présents dans le localStorage
 const createProductsIDsArray = () => {
     let productsListString = localStorage.getItem("productsInCart");
-    //console.log(productsListString);
     let productsList = JSON.parse(productsListString);
-    //console.log(productsList);
     let productsIDs = [];
     productsList.forEach((product) => {
         let productObject = JSON.parse(product);
         productsIDs.push(productObject.productId);
-        //console.log(productObject.productId);
     })
-    //console.log(productsIDs);
     return productsIDs;
 }
 
@@ -156,7 +150,6 @@ const callApiWithPOSTMethod = ($JSONToSend) => {
             }
         };
     });
-    //console.log(apiResponse);
     return apiResponse;
 };
 
@@ -165,19 +158,14 @@ const callApiWithPOSTMethod = ($JSONToSend) => {
 // puis redirige vers la page de confirmation de commande
 async function sendOrder() {
     let contact = createContact();
-    //console.log(contact);
     let productsIDs = createProductsIDsArray();
-    //console.log(productsIDs);
     let order = {
         contact: contact,
         products: productsIDs
     }
-    console.log(JSON.stringify(order));
     let responseFromApi = await callApiWithPOSTMethod(JSON.stringify(order));
-    console.log(responseFromApi);
     localStorage.setItem("lastOrderContact", JSON.stringify(responseFromApi.contact));
     localStorage.setItem("lastOrderId", JSON.stringify(responseFromApi.orderId));
-    console.log(localStorage);
     window.location.replace("../pages/confirmation.html");
 };
 
