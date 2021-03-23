@@ -1,0 +1,32 @@
+.btn {
+    background-color: $clr-secondary;
+    font-size: 1.25rem;
+    color: #fff;
+    font-weight: bold;
+    border-radius: $btn-radius;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    &::after {
+        content:"";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: darken($clr-secondary, 20%);
+        opacity: 0;
+        transition: opacity 150ms ease-in-out;
+        z-index: -1;
+    }
+    &:hover {
+        color: #fff;
+        &::after {
+            opacity: 1;
+        }
+    }
+    &--cross {
+        border: none;
+        background-color: inherit;
+    }
+}

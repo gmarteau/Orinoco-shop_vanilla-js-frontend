@@ -1,0 +1,44 @@
+@mixin img-fill-space {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@mixin bg-light($color) {
+    background-color: lighten($color, $light-amount);
+}
+
+@mixin font($font) {
+    @if ($font == "lato") {
+        font-family: 'latoregular', sans-serif;
+    }
+    @else if ($font == "spurple") {
+        font-family: 'sweet_purpleregular', sans-serif;
+    }
+}
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($map: $breakpoints, $key: sm-max)) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media screen and (min-width: map-get($map: $breakpoints, $key: md-min)) and (max-width: map-get($map: $breakpoints, $key: md-max)) {
+        @content;
+    }
+}
+
+@mixin input-state($state) {
+    @if ($state == "valid") {
+        border: solid 2px $clr-valid;
+    }
+    @else if ($state == "invalid") {
+        border: solid 2px $clr-invalid;
+    }
+}

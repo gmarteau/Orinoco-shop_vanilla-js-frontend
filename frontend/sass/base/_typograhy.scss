@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'latoregular';
+    src: url('../fonts/lato-regular-webfont.eot');
+    src: url('../fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lato-regular-webfont.woff2') format('woff2'),
+         url('../fonts/lato-regular-webfont.woff') format('woff'),
+         url('../fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('../fonts/lato-regular-webfont.svg#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'sweet_purpleregular';
+    src: url('../fonts/sweet_purple-webfont.eot');
+    src: url('../fonts/sweet_purple-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/sweet_purple-webfont.woff2') format('woff2'),
+         url('../fonts/sweet_purple-webfont.woff') format('woff'),
+         url('../fonts/sweet_purple-webfont.ttf') format('truetype'),
+         url('../fonts/sweet_purple-webfont.svg#sweet_purpleregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+*:not(.logo) {
+    @include font(lato);
+}
