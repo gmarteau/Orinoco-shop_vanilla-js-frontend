@@ -1,0 +1,20 @@
+.logo {
+    @include font(spurple);
+    color: $clr-primary;
+    &.logo--secondary {
+        color: $clr-secondary;
+    }
+    &.logo--med {
+        font-size: 2rem;
+    }
+    &.logo--big {
+        font-size: 4rem;
+        @include mobile-only {
+            font-size: 3rem;
+        }
+    }
+    &.logo--bigger {
+        font-size: 7rem;
+    }
+}
+

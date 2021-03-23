@@ -1,0 +1,24 @@
+{
+  "name": "orinoco-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ../frontend/sass/main.scss:../frontend/css/style.css",
+    "sass-min": "sass --watch ../frontend/sass/main.scss:../frontend/css/style-min.css --style compressed",
+    "prefix": "postcss ../frontend/css/style-min.css --use autoprefixer -d ../frontend/css-prefixed/"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": "last 4 versions",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.8",
+    "mongoose-unique-validator": "^2.0.2",
+    "uuid": "^3.3.2"
+  }
+}

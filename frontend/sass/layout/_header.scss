@@ -1,0 +1,59 @@
+.header {
+    //height: $hdr-height;
+    background-color: $clr-secondary;
+    &__content {
+        display: flex;
+        align-items: flex-end;
+        > .row {
+            width: 100%;
+        }
+    }
+    &__brand {
+        font-size: 1.75rem;
+        &:hover {
+            color: $clr-primary;
+        }
+    }
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        &__icon {
+            color: #fff;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        &__list {
+            max-width: max-content;
+            &__item {
+                color: #fff;
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    height: 2px;
+                    width: 100%;
+                    bottom: -8px;
+                    left: 0;
+                    background-color: #fff;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 150ms ease-in-out;
+                }
+                &:hover {
+                    color: #fff;
+                    &::after {
+                        transform: scaleX(1);
+                    }
+                }
+                &.header__nav__list__item--active {
+                    color: $clr-primary;
+                    &::after {
+                        background-color: $clr-primary;
+                    }
+                    &:hover {
+                        color: $clr-primary;
+                    }
+                }
+            }    
+        }
+    }
+}

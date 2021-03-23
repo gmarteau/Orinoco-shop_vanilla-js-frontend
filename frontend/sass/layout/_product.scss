@@ -1,0 +1,65 @@
+.product {
+    height: $pdt-sheet-height;
+    @include mobile-only {
+        height: auto;
+    }
+    @include tablet-only {
+        height: auto;
+    }
+    &__invalid {
+        height: 100%;
+        @include mobile-only {
+            height: 730px;
+        }
+        @include tablet-only {
+            height: 730px;
+        }
+    }
+    &__content {
+        height: 100%;
+    }
+    &__pic {
+        position: relative;
+        border-radius: $pdt-sheet-img-radius;
+        overflow: hidden;
+        @include mobile-only {
+            height: 300px;
+            width: 90%;
+            margin: auto;
+        }
+        @include tablet-only {
+            height: 400px;
+        }
+        &__img {
+            @include img-fill-space;
+        }
+    }
+    &__txt {
+        color: $clr-tertiary;
+        @include tablet-only {
+            display: flex;
+            justify-content: space-between;
+        }
+        &__name {
+            @include font(spurple);
+            font-size: 4rem;
+        }
+    }
+    &__form {
+        @include tablet-only {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        &__item {
+            color: $clr-tertiary;
+        }
+    }
+    &__btn {
+        position: relative;
+        @include mobile-only {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

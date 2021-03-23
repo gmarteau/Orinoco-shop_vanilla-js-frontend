@@ -1,0 +1,56 @@
+.buyingForm {
+    color: $clr-tertiary;
+    &__title {
+        width: max-content;
+        &__txt {
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                width: 75%;
+                height: 4px;
+                background-color: $clr-tertiary;
+                bottom: -40%;
+                left: 0;
+            }    
+        }
+    }
+    &__content {
+        @include mobile-only {
+            display: flex;
+            justify-content: center;
+        }
+        @include tablet-only {
+            display: flex;
+            justify-content: center;
+        }
+    }
+    &__btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        &__alert {
+            position: absolute;
+            top: -75%;
+            background-color: #fff;
+            border-radius: 1rem;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: opacity 500ms ease-in-out;
+        }
+    }
+    &__error {
+        border-radius: 1rem;
+    }
+}
+
+input {
+    &:valid {
+        @include input-state(valid);
+    }
+    &.error {
+        @include input-state(invalid);
+    }
+}
